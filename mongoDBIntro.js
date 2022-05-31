@@ -147,3 +147,36 @@ const deletePosts = (blogIds)=> {
     return erasePost
 }
 console.log(deletePosts(51))
+
+//stretch goal
+
+const posts = db.posts.find({}).toArray();
+
+const generatedusers = []
+
+let idNumber = 1
+
+posts.forEach(post => {
+    
+    const userEmail = post.author.split(" ")[0] + "." + post.author.split(" ")[1] + '@gmail.com'
+    
+    const foundUserIndex = generatedusers.indexOf(user => user.email = userEmail)
+    
+    const postId = new ObjectId(post._id)
+    
+    const newUsers = {
+        
+        firstName : post.author.split(" ")[0],
+        lastName: post.author.split(" ")[1],
+        userId: idNumber++,
+        email: userEmail,
+        posts: postId,
+
+    }
+        // console.log(newUsers)
+    generatedusers.push(newUsers)
+    
+})
+  console.log(generatedusers)
+
+db.users.insertMany(generatedusers)
