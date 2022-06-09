@@ -136,12 +136,12 @@ const updatePost = (blogId, title, text, author, category) => {
 
 const deletePosts = (blogIds)=> {
     
-    // const findId = db.posts.find({
-    //     id:blogIds
-    // }).toArray()
+
     
     const erasePost = db.posts.deleteMany({
-        id: blogIds
+        id: {
+            $in:blogIds
+        }
     })
     
     return erasePost
